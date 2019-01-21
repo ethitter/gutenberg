@@ -1112,9 +1112,20 @@ JS;
 		);
 	}
 
+	$available_legacy_widgets = array();
+	global $wp_widget_factory;
+
+	foreach ( $wp_widget_factory->widgets as $class => $widget_obj ) {
+		$available_legacy_widgets[ $class ] = array(
+			'name'        => html_entity_decode( $widget_obj->name ),
+			'description' => html_entity_decode( $widget_obj->widget_options['description'] ),
+		);
+	}
+
 	$editor_settings = array(
 		'alignWide'              => $align_wide || ! empty( $gutenberg_theme_support[0]['wide-images'] ), // Backcompat. Use `align-wide` outside of `gutenberg` array.
 		'availableTemplates'     => $available_templates,
+		'availableLegacyWidgets' => $available_legacy_widgets,
 		'allowedBlockTypes'      => $allowed_block_types,
 		'disableCustomColors'    => get_theme_support( 'disable-custom-colors' ),
 		'disableCustomFontSizes' => get_theme_support( 'disable-custom-font-sizes' ),

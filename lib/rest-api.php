@@ -21,6 +21,17 @@ function gutenberg_register_rest_routes() {
 }
 
 /**
+ * Registers the REST API routes needed by the legacy widget block.
+ *
+ * @since 5.0.0
+ */
+function gutenberg_register_rest_widget_updater_routes() {
+	$widgets_controller = new WP_REST_Widget_Updater_Controller();
+	$widgets_controller->register_routes();
+}
+add_action( 'rest_api_init', 'gutenberg_register_rest_widget_updater_routes' );
+
+/**
  * Handle a failing oEmbed proxy request to try embedding as a shortcode.
  *
  * @see https://core.trac.wordpress.org/ticket/45447

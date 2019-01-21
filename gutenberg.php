@@ -55,6 +55,13 @@ function the_gutenberg_project() {
 		<div id="metaboxes" class="hidden">
 			<?php the_block_editor_meta_boxes(); ?>
 		</div>
+		<?php
+		/** This action is documented in wp-admin/admin-footer.php */
+		do_action( 'admin_print_footer_scripts-widgets.php' );
+
+		/** This action is documented in wp-admin/admin-footer.php */
+		do_action( 'admin_footer-widgets.php' );
+		?>
 	</div>
 	<?php
 }
@@ -227,6 +234,9 @@ function gutenberg_init( $return, $post ) {
 	 * contenteditable fields.
 	 */
 	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+
+	do_action( 'admin_print_styles-widgets.php' );
+	do_action( 'admin_print_scripts-widgets.php' );
 
 	/*
 	 * Ensure meta box functions are available to third-party code;
